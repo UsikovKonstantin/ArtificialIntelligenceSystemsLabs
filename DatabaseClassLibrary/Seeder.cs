@@ -26,7 +26,7 @@ public static class Seeder
 						MaritalStatus = MaritalStatus.Single,
 						HasChildren = false,
 						Position = "Лаборант",
-						AcademicDegree = AcademicDegree.Doctor
+						AcademicDegree = AcademicDegree.None
 					},
 					new Employee
 					{
@@ -35,22 +35,22 @@ public static class Seeder
 						Patronymic = "Михайлович",
 						Gender = Gender.Male,
 						DateOfBirth = new DateTime(1999, 3, 18),
-						MaritalStatus = MaritalStatus.Single,
-						HasChildren = false,
+						MaritalStatus = MaritalStatus.Married,
+						HasChildren = true,
 						Position = "Инженер-исследователь",
-						AcademicDegree = AcademicDegree.Doctor
+						AcademicDegree = AcademicDegree.None
 					},
 					new Employee
 					{
 						LastName = "Щербакова",
 						FirstName = "Варвара",
 						Patronymic = "Николаевна",
-						Gender = Gender.Male,
+						Gender = Gender.Female,
 						DateOfBirth = new DateTime(2000, 4, 7),
 						MaritalStatus = MaritalStatus.Single,
 						HasChildren = false,
 						Position = "Младший научный сотрудник",
-						AcademicDegree = AcademicDegree.Doctor
+						AcademicDegree = AcademicDegree.Candidate
 					},
 					new Employee
 					{
@@ -59,7 +59,7 @@ public static class Seeder
 						Patronymic = "Георгиевич",
 						Gender = Gender.Male,
 						DateOfBirth = new DateTime(1966, 1, 3),
-						MaritalStatus = MaritalStatus.Single,
+						MaritalStatus = MaritalStatus.Married,
 						HasChildren = false,
 						Position = "Ведущий научный сотрудник",
 						AcademicDegree = AcademicDegree.Doctor
@@ -81,12 +81,12 @@ public static class Seeder
 						LastName = "Максимова",
 						FirstName = "Олеся",
 						Patronymic = "Львовна",
-						Gender = Gender.Male,
+						Gender = Gender.Female,
 						DateOfBirth = new DateTime(1964, 10, 10),
-						MaritalStatus = MaritalStatus.Single,
-						HasChildren = false,
+						MaritalStatus = MaritalStatus.Married,
+						HasChildren = true,
 						Position = "Руководитель лаборатории",
-						AcademicDegree = AcademicDegree.Doctor
+						AcademicDegree = AcademicDegree.Candidate
 					},
 					new Employee
 					{
@@ -95,10 +95,10 @@ public static class Seeder
 						Patronymic = "Анатольевич",
 						Gender = Gender.Male,
 						DateOfBirth = new DateTime(1987, 7, 19),
-						MaritalStatus = MaritalStatus.Single,
-						HasChildren = false,
+						MaritalStatus = MaritalStatus.Divorced,
+						HasChildren = true,
 						Position = "Техник лаборатории",
-						AcademicDegree = AcademicDegree.Doctor
+						AcademicDegree = AcademicDegree.None
 					},
 					new Employee
 					{
@@ -107,19 +107,19 @@ public static class Seeder
 						Patronymic = "Андреевич",
 						Gender = Gender.Male,
 						DateOfBirth = new DateTime(1960, 1, 15),
-						MaritalStatus = MaritalStatus.Single,
-						HasChildren = false,
+						MaritalStatus = MaritalStatus.Widowed,
+						HasChildren = true,
 						Position = "Ассистент",
-						AcademicDegree = AcademicDegree.Doctor
+						AcademicDegree = AcademicDegree.None
 					},
 					new Employee
 					{
 						LastName = "Климова",
 						FirstName = "Алина",
 						Patronymic = "Александровна",
-						Gender = Gender.Male,
+						Gender = Gender.Female,
 						DateOfBirth = new DateTime(1975, 9, 24),
-						MaritalStatus = MaritalStatus.Single,
+						MaritalStatus = MaritalStatus.Divorced,
 						HasChildren = false,
 						Position = "Аналитик",
 						AcademicDegree = AcademicDegree.Doctor
@@ -129,12 +129,12 @@ public static class Seeder
 						LastName = "Новикова",
 						FirstName = "Алиса",
 						Patronymic = "Гордеевна",
-						Gender = Gender.Male,
+						Gender = Gender.Female,
 						DateOfBirth = new DateTime(1999, 5, 13),
-						MaritalStatus = MaritalStatus.Single,
-						HasChildren = false,
+						MaritalStatus = MaritalStatus.Widowed,
+						HasChildren = true,
 						Position = "Инженер-программист",
-						AcademicDegree = AcademicDegree.Doctor
+						AcademicDegree = AcademicDegree.Candidate
 					}
 				};
 

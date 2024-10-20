@@ -1,23 +1,34 @@
-﻿namespace DatabaseClassLibrary;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DatabaseClassLibrary;
 
 public enum Gender
 {
+	[Display(Name = "Мужской")]
 	Male,
+	[Display(Name = "Женский")]
 	Female
 }
 
 public enum MaritalStatus
 {
+	[Display(Name = "Не в браке")]
 	Single,
+	[Display(Name = "В браке")]
 	Married,
+	[Display(Name = "Разведен(а)")]
 	Divorced,
+	[Display(Name = "Вдова(ец)")]
 	Widowed
 }
 
 public enum AcademicDegree
 {
+	[Display(Name = "Нет")]
 	None,
-	Сandidate,
+	[Display(Name = "Кандидат наук")]
+	Candidate,
+	[Display(Name = "Доктор наук")]
 	Doctor
 }
 

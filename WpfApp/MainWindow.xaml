@@ -12,7 +12,7 @@
             <TabItem Header="Просмотр">
                 <Grid>
                     <TextBox Name="SearchTextBox" Width="200" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Button Content="Поиск" Width="100" Margin="220,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Button Content="Поиск" Width="100" Margin="220,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click"/>
                     <DataGrid Name="EmployeesDataGrid" Margin="10,50,10,50" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" />
