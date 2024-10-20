@@ -15,4 +15,11 @@ public class User
 	public string Login { get; set; } = string.Empty;
 	public string Password { get; set; } = string.Empty;
 	public UserRole Role { get; set; }
+
+	public override string ToString()
+	{
+		return $"Id: {Id}, LastName: {LastName}, FirstName: {FirstName}, " +
+			$"Patronymic: {Patronymic}, Login: {Login}, Password: {Password}, " +
+			$"Role: {Role}";
+	}
 }

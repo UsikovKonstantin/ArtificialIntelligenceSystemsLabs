@@ -1,0 +1,44 @@
+﻿<Window x:Class="WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl>
+            <!-- Вкладка Просмотр -->
+            <TabItem Header="Просмотр">
+                <Grid>
+                    <TextBox Name="SearchTextBox" Width="200" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Button Content="Поиск" Width="100" Margin="220,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <DataGrid Name="EmployeesDataGrid" Margin="10,50,10,50" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" />
+                            <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" />
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}" />
+                            <DataGridTextColumn Header="Должность" Binding="{Binding Position}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Сохранить в CSV" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка Редактирование (доступно только HR) -->
+            <TabItem Header="Редактирование" Name="EditTab" IsEnabled="False">
+                <Grid>
+                    <!-- Поля для добавления/редактирования сотрудников -->
+                    <TextBox Name="LastNameTextBox" Width="150" Margin="10"/>
+                    <TextBox Name="FirstNameTextBox" Width="150" Margin="10"/>
+                    <TextBox Name="PatronymicTextBox" Width="150" Margin="10"/>
+                    <TextBox Name="PositionTextBox" Width="150" Margin="10"/>
+
+                    <Button Content="Добавить"/>
+                    <Button Content="Удалить"/>
+                    <Button Content="Обновить"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

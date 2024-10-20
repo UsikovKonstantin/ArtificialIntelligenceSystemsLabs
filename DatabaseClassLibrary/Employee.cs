@@ -33,4 +33,12 @@ public class Employee
 	public bool HasChildren { get; set; }
 	public string Position { get; set; } = string.Empty;
 	public AcademicDegree AcademicDegree { get; set; }
+
+	public override string ToString()
+	{
+		return $"Id: {Id}, LastName: {LastName}, FirstName: {FirstName}, " +
+			$"Patronymic: {Patronymic}, Gender: {Gender}, DateOfBirth: {DateOfBirth}, " +
+			$"MaritalStatus: {MaritalStatus}, HasChildren: {HasChildren}, " +
+			$"Position: {Position}, AcademicDegree: {AcademicDegree}";
+	}
 }
