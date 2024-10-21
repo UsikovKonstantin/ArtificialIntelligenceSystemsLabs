@@ -1,16 +1,5 @@
 ﻿using DatabaseClassLibrary;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfApp
 {
@@ -39,7 +28,7 @@ namespace WpfApp
 			using (LaboratoryContext context = new LaboratoryContext())
 			{
 				List<Employee> employees = context.Employees.ToList();
-				EmployeesDataGrid.ItemsSource = employees;
+				dataGridEmployees.ItemsSource = employees;
 			}
 		}
 
@@ -66,7 +55,13 @@ namespace WpfApp
 			}
 			*/
 
+			/*
 			AddWindow addWindow = new AddWindow();
+			addWindow.ShowDialog();
+			LoadEmployees();
+			*/
+
+			UpsertWindow addWindow = new UpsertWindow(dataGridEmployees.SelectedItem as Employee);
 			addWindow.ShowDialog();
 			LoadEmployees();
 		}

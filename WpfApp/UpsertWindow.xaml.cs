@@ -1,38 +1,32 @@
 ﻿using DatabaseClassLibrary;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WpfApp
 {
 	/// <summary>
-	/// Логика взаимодействия для AddWindow.xaml
+	/// Логика взаимодействия для UpsertWindow.xaml
 	/// </summary>
-	public partial class AddWindow : Window
+	public partial class UpsertWindow : Window
 	{
-		public AddWindow()
+		private int _id;
+
+		public UpsertWindow()
 		{
 			InitializeComponent();
-
-			FillComboBoxes();
-
-			datePickerDateOfBirth.SelectedDate = new DateTime(2000, 1, 1);
+			FillFields();
+			_id = 0;
 		}
 
-		private void FillComboBoxes()
+		public UpsertWindow(Employee employee)
+		{
+			InitializeComponent();
+			FillFields(employee);
+			_id = employee.Id;
+		}
+
+		private void FillFields()
 		{
 			comboBoxGender.ItemsSource = GetEnumDisplayValues<Gender>();
 			comboBoxGender.SelectedIndex = 0;
@@ -42,6 +36,34 @@ namespace WpfApp
 
 			comboBoxAcademicDegree.ItemsSource = GetEnumDisplayValues<AcademicDegree>();
 			comboBoxAcademicDegree.SelectedIndex = 0;
+
+			datePickerDateOfBirth.SelectedDate = new DateTime(2000, 1, 1);
+
+			buttonUpsert.Content = "Добавить";
+		}
+
+		private void FillFields(Employee employee)
+		{
+			textBoxLastName.Text = employee.LastName;
+			textBoxFirstName.Text = employee.FirstName;
+			textBoxPatronymic.Text = employee.Patronymic;
+
+			comboBoxGender.ItemsSource = GetEnumDisplayValues<Gender>();
+			comboBoxGender.SelectedItem = GetEnumDisplayValue(employee.Gender);
+
+			datePickerDateOfBirth.SelectedDate = employee.DateOfBirth;
+
+			comboBoxMaritalStatus.ItemsSource = GetEnumDisplayValues<MaritalStatus>();
+			comboBoxMaritalStatus.SelectedItem = GetEnumDisplayValue(employee.MaritalStatus);
+
+			checkBoxHasChildren.IsChecked = employee.HasChildren;
+
+			textBoxPosition.Text = employee.Position;
+
+			comboBoxAcademicDegree.ItemsSource = GetEnumDisplayValues<AcademicDegree>();
+			comboBoxAcademicDegree.SelectedItem = GetEnumDisplayValue(employee.AcademicDegree);
+
+			buttonUpsert.Content = "Изменить";
 		}
 
 		private List<string> GetEnumDisplayValues<T>() where T : Enum
@@ -49,6 +71,16 @@ namespace WpfApp
 			return typeof(T).GetFields(BindingFlags.Public | BindingFlags.Static)
 							.Select(f => f.GetCustomAttribute<DisplayAttribute>()?.Name ?? f.Name)
 							.ToList();
+		}
+
+		private string GetEnumDisplayValue<T>(T enumValue) where T : Enum
+		{
+			return enumValue.GetType()
+				.GetField(enumValue.ToString())
+				.GetCustomAttributes(typeof(DisplayAttribute), false)
+				.SingleOrDefault() is DisplayAttribute displayAttribute
+				? displayAttribute.Name
+				: enumValue.ToString();
 		}
 
 		public static T GetEnumValueFromDisplayName<T>(string displayName) where T : Enum
@@ -75,7 +107,7 @@ namespace WpfApp
 			this.DialogResult = true;
 		}
 
-		private void buttonAdd_Click(object sender, RoutedEventArgs e)
+		private void buttonUpsert_Click(object sender, RoutedEventArgs e)
 		{
 			List<string> errors = new List<string>();
 			if (textBoxLastName.Text.Trim() == "")
@@ -106,8 +138,27 @@ namespace WpfApp
 
 			using (LaboratoryContext context = new LaboratoryContext())
 			{
-				context.Add(employee);
-				context.SaveChanges();
+				if (_id == 0)
+				{
+					context.Add(employee);
+					context.SaveChanges();
+				}
+				else
+				{
+					Employee emp = context.Employees.First(e => e.Id == _id);
+
+					emp.LastName = employee.LastName;
+					emp.FirstName = employee.FirstName;
+					emp.Patronymic = employee.Patronymic;
+					emp.Gender = employee.Gender;
+					emp.DateOfBirth = employee.DateOfBirth;
+					emp.MaritalStatus = employee.MaritalStatus;
+					emp.HasChildren = employee.HasChildren;
+					emp.Position = employee.Position;
+					emp.AcademicDegree = employee.AcademicDegree;
+
+					context.SaveChanges();
+				}
 			}
 
 			this.DialogResult = true;
