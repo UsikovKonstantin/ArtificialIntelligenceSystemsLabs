@@ -5,38 +5,128 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="1150">
     <Grid>
         <TabControl>
-            <!-- Вкладка Просмотр -->
             <TabItem Header="Просмотр">
                 <Grid>
-                    <TextBox Name="SearchTextBox" Width="200" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Button Content="Поиск" Width="100" Margin="220,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click"/>
-                    <DataGrid Name="dataGridEmployees" Margin="10,50,10,50" AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" />
-                            <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" />
-                            <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}" />
-                            <DataGridTextColumn Header="Должность" Binding="{Binding Position}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <Button Content="Сохранить в CSV" Width="150" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" >
+                        <DataGrid Name="dataGridEmployeesView" 
+                                  AutoGenerateColumns="False"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  FontSize="16"
+                                  CanUserAddRows="False"
+                                  IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" />
+                                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" />
+                                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}" />
+                                <DataGridTextColumn Header="Пол" Binding="{Binding GenderDisplay}" />
+                                <DataGridTextColumn Header="Дата рождения" Binding="{Binding DateOfBirth, StringFormat={}{0:dd.MM.yyyy}}" />
+                                <DataGridTextColumn Header="Семейное положение" Binding="{Binding MaritalStatusDisplay}" />
+                                <DataGridCheckBoxColumn Header="Наличие детей" Binding="{Binding HasChildren}" />
+                                <DataGridTextColumn Header="Должность" Binding="{Binding Position}" />
+                                <DataGridTextColumn Header="Ученая степень" Binding="{Binding AcademicDegreeDisplay}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+                    <Grid Grid.Row="1" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                x:Name="buttonFilter"
+                                Content="Отфильтровать" 
+                                FontSize="20" 
+                                HorizontalContentAlignment="Center" 
+                                VerticalContentAlignment="Center"
+                                Height="40"
+                                Margin="5,5,5,5" Click="buttonFilter_Click"/>
+
+                        <Button Grid.Column="1"
+                                x:Name="buttonReport"
+                                Content="Сформировать отчет" 
+                                FontSize="20" 
+                                HorizontalContentAlignment="Center" 
+                                VerticalContentAlignment="Center"
+                                Height="40"
+                                Margin="5,5,5,5" Click="buttonReport_Click"/>
+                    </Grid>
                 </Grid>
             </TabItem>
 
-            <!-- Вкладка Редактирование (доступно только HR) -->
             <TabItem Header="Редактирование" Name="EditTab" IsEnabled="False">
                 <Grid>
-                    <!-- Поля для добавления/редактирования сотрудников -->
-                    <TextBox Name="LastNameTextBox" Width="150" Margin="10"/>
-                    <TextBox Name="FirstNameTextBox" Width="150" Margin="10"/>
-                    <TextBox Name="PatronymicTextBox" Width="150" Margin="10"/>
-                    <TextBox Name="PositionTextBox" Width="150" Margin="10"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
 
-                    <Button Content="Добавить"/>
-                    <Button Content="Удалить"/>
-                    <Button Content="Обновить"/>
+                    <Grid Grid.Row="0" >
+                        <DataGrid Name="dataGridEmployeesEdit" 
+                                  AutoGenerateColumns="False"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  FontSize="16"
+                                  CanUserAddRows="False"
+                                  IsReadOnly="True" SelectionChanged="dataGridEmployeesEdit_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" />
+                                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" />
+                                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}" />
+                                <DataGridTextColumn Header="Пол" Binding="{Binding GenderDisplay}" />
+                                <DataGridTextColumn Header="Дата рождения" Binding="{Binding DateOfBirth, StringFormat={}{0:dd.MM.yyyy}}" />
+                                <DataGridTextColumn Header="Семейное положение" Binding="{Binding MaritalStatusDisplay}" />
+                                <DataGridCheckBoxColumn Header="Наличие детей" Binding="{Binding HasChildren}" />
+                                <DataGridTextColumn Header="Должность" Binding="{Binding Position}" />
+                                <DataGridTextColumn Header="Ученая степень" Binding="{Binding AcademicDegreeDisplay}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+                    <Grid Grid.Row="1" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                x:Name="buttonAdd"
+                                Content="Добавить" 
+                                FontSize="20" 
+                                HorizontalContentAlignment="Center" 
+                                VerticalContentAlignment="Center"
+                                Height="40"
+                                Margin="5,5,5,5" Click="buttonAdd_Click"/>
+
+                        <Button Grid.Column="1"
+                                x:Name="buttonEdit"
+                                Content="Изменить" 
+                                FontSize="20" 
+                                HorizontalContentAlignment="Center" 
+                                VerticalContentAlignment="Center"
+                                Height="40"
+                                Margin="5,5,5,5" Click="buttonEdit_Click"/>
+                        
+                        <Button Grid.Column="2"
+                                x:Name="buttonDelete"
+                                Content="Удалить" 
+                                FontSize="20" 
+                                HorizontalContentAlignment="Center" 
+                                VerticalContentAlignment="Center"
+                                Height="40"
+                                Margin="5,5,5,5" Click="buttonDelete_Click"/>
+                    </Grid>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace DatabaseClassLibrary;
 
@@ -44,6 +45,17 @@ public class Employee
 	public bool HasChildren { get; set; }
 	public string Position { get; set; } = string.Empty;
 	public AcademicDegree AcademicDegree { get; set; }
+
+	public string GenderDisplay => GetEnumDisplayValue(Gender);
+	public string MaritalStatusDisplay => GetEnumDisplayValue(MaritalStatus);
+	public string AcademicDegreeDisplay => GetEnumDisplayValue(AcademicDegree);
+
+	private string GetEnumDisplayValue<T>(T enumValue)
+	{
+		var field = enumValue.GetType().GetField(enumValue.ToString());
+		var displayAttribute = field.GetCustomAttribute<DisplayAttribute>();
+		return displayAttribute?.Name ?? enumValue.ToString();
+	}
 
 	public override string ToString()
 	{
