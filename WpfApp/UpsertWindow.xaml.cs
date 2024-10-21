@@ -10,6 +10,7 @@ namespace WpfApp
 	/// </summary>
 	public partial class UpsertWindow : Window
 	{
+		private EmployeeRepository _employeeRepository = new EmployeeRepository();
 		private int _id;
 
 		public UpsertWindow()
@@ -136,31 +137,16 @@ namespace WpfApp
 			employee.Position = textBoxPosition.Text.Trim();
 			employee.AcademicDegree = GetEnumValueFromDisplayName<AcademicDegree>(comboBoxAcademicDegree.SelectedItem.ToString()!);
 
-			using (LaboratoryContext context = new LaboratoryContext())
+			if (_id == 0)
 			{
-				if (_id == 0)
-				{
-					context.Add(employee);
-					context.SaveChanges();
-				}
-				else
-				{
-					Employee emp = context.Employees.First(e => e.Id == _id);
-
-					emp.LastName = employee.LastName;
-					emp.FirstName = employee.FirstName;
-					emp.Patronymic = employee.Patronymic;
-					emp.Gender = employee.Gender;
-					emp.DateOfBirth = employee.DateOfBirth;
-					emp.MaritalStatus = employee.MaritalStatus;
-					emp.HasChildren = employee.HasChildren;
-					emp.Position = employee.Position;
-					emp.AcademicDegree = employee.AcademicDegree;
-
-					context.SaveChanges();
-				}
+				_employeeRepository.AddEmployee(employee);
 			}
-
+			else
+			{
+				employee.Id = _id;
+				_employeeRepository.UpdateEmployee(employee);
+			}
+			
 			this.DialogResult = true;
 		}
 	}

@@ -11,11 +11,13 @@ namespace WpfApp
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		private EmployeeRepository _employeeRepository;
 		private User _loggedUser;
 
 		public MainWindow(User user)
 		{
 			InitializeComponent();
+			_employeeRepository = new EmployeeRepository();
 			_loggedUser = user;
 
 			if (_loggedUser.Role == UserRole.HRStaff)
@@ -30,12 +32,9 @@ namespace WpfApp
 
 		private void LoadAllEmployees()
 		{
-			using (LaboratoryContext context = new LaboratoryContext())
-			{
-				List<Employee> employees = context.Employees.ToList();
-				dataGridEmployeesView.ItemsSource = employees;
-				dataGridEmployeesEdit.ItemsSource = employees;
-			}
+			List<Employee> employees = _employeeRepository.GetAllEmployees();
+			dataGridEmployeesView.ItemsSource = employees;
+			dataGridEmployeesEdit.ItemsSource = employees;
 		}
 
 		private void buttonFilter_Click(object sender, RoutedEventArgs e)
@@ -44,12 +43,7 @@ namespace WpfApp
 			if (filterWindow.ShowDialog() == true)
 			{
 				FilterOptions filterOptions = filterWindow.FilterOptions;
-				using (LaboratoryContext context = new LaboratoryContext())
-				{
-					List<Employee> employees = Helper.FilterEmployees(context.Employees.ToList(), filterOptions);
-
-					dataGridEmployeesView.ItemsSource = employees;
-				}
+				dataGridEmployeesView.ItemsSource = Helper.FilterEmployees(_employeeRepository.GetAllEmployees(), filterOptions);
 			} 
 		}
 
@@ -111,13 +105,8 @@ namespace WpfApp
 			MessageBoxResult result = MessageBox.Show($"Вы уверены, что хотите удалить {selectedEmployees.Count} сотрудника(ов)?", "Подтверждение удаления", MessageBoxButton.YesNo);
 			if (result == MessageBoxResult.Yes)
 			{
-				using (LaboratoryContext context = new LaboratoryContext())
-				{
-					foreach (Employee employee in selectedEmployees)
-						context.Employees.Remove(employee); 
-					context.SaveChanges(); 
-				}
-
+				foreach (Employee employee in selectedEmployees)
+					_employeeRepository.DeleteEmployee(employee.Id);
 				LoadAllEmployees();
 			}
 		}
