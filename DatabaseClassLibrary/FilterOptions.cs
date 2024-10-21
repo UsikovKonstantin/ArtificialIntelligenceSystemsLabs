@@ -1,6 +1,4 @@
-﻿using DatabaseClassLibrary;
-
-namespace WpfApp;
+﻿namespace DatabaseClassLibrary;
 
 public class FilterOptions
 {

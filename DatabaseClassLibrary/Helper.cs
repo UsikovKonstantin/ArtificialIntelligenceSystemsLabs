@@ -1,9 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace DatabaseClassLibrary;
 
-public static class Seeder
+public static class Helper
 {
+	public static void ClearDatabase()
+	{
+		using (LaboratoryContext context = new LaboratoryContext())
+		{
+			context.Database.Migrate();
+
+			List<Employee> employees = context.Employees.ToList();
+			context.Employees.RemoveRange(employees);
+			context.SaveChanges();
+
+			List<User> users = context.Users.ToList();
+			context.Users.RemoveRange(users);
+			context.SaveChanges();
+		}
+	}
+
 	public static void SeedDatabase()
 	{
 		using (LaboratoryContext context = new LaboratoryContext())
@@ -170,5 +187,18 @@ public static class Seeder
 			context.Users.AddRange(usersToAdd);
 			context.SaveChanges();
 		}
+	}
+
+	public static List<Employee> FilterEmployees(List<Employee> employees, FilterOptions filterOptions)
+	{
+		return employees.Where(e =>
+			e.LastName.ToLower().Contains(filterOptions.LastName.ToLower()) &&
+			e.FirstName.ToLower().Contains(filterOptions.FirstName.ToLower()) &&
+			e.Patronymic!.ToLower().Contains(filterOptions.Patronymic.ToLower()) &&
+			(filterOptions.Gender == null || e.Gender == filterOptions.Gender) &&
+			(filterOptions.MaritalStatus == null || e.MaritalStatus == filterOptions.MaritalStatus) &&
+			(filterOptions.HasChildren == null || e.HasChildren == filterOptions.HasChildren) &&
+			e.Position.ToLower().Contains(filterOptions.Position.ToLower()) &&
+			(filterOptions.AcademicDegree == null || e.AcademicDegree == filterOptions.AcademicDegree)).ToList();
 	}
 }

@@ -41,23 +41,16 @@ namespace WpfApp
 		private void buttonFilter_Click(object sender, RoutedEventArgs e)
 		{
 			FilterWindow filterWindow = new FilterWindow();
-			filterWindow.ShowDialog();
-
-			FilterOptions filterOptions = filterWindow.FilterOptions;
-			using (LaboratoryContext context = new LaboratoryContext())
+			if (filterWindow.ShowDialog() == true)
 			{
-				List<Employee> employees = context.Employees.ToList().Where(e =>
-					e.LastName.ToLower().Contains(filterOptions.LastName.ToLower()) &&
-					e.FirstName.ToLower().Contains(filterOptions.FirstName.ToLower()) &&
-					e.Patronymic!.ToLower().Contains(filterOptions.Patronymic.ToLower()) &&
-					(filterOptions.Gender == null || e.Gender == filterOptions.Gender) &&
-					(filterOptions.MaritalStatus == null || e.MaritalStatus == filterOptions.MaritalStatus) &&
-					(filterOptions.HasChildren == null || e.HasChildren == filterOptions.HasChildren) &&
-					e.Position.ToLower().Contains(filterOptions.Position.ToLower()) &&
-					(filterOptions.AcademicDegree == null || e.AcademicDegree == filterOptions.AcademicDegree)).ToList();
+				FilterOptions filterOptions = filterWindow.FilterOptions;
+				using (LaboratoryContext context = new LaboratoryContext())
+				{
+					List<Employee> employees = Helper.FilterEmployees(context.Employees.ToList(), filterOptions);
 
-				dataGridEmployeesView.ItemsSource = employees;
-			}
+					dataGridEmployeesView.ItemsSource = employees;
+				}
+			} 
 		}
 
 		private void buttonReport_Click(object sender, RoutedEventArgs e)

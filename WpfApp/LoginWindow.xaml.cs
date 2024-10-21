@@ -11,7 +11,7 @@ namespace WpfApp
 		public LoginWindow()
 		{
 			InitializeComponent();
-			Seeder.SeedDatabase();
+			Helper.SeedDatabase();
 		}
 
 		private void buttonLogin_Click(object sender, RoutedEventArgs e)
