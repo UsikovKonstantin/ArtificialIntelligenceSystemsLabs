@@ -45,6 +45,7 @@ namespace WpfApp
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
+			/*
 			FilterWindow filterWindow = new FilterWindow();
 			filterWindow.ShowDialog();
 
@@ -63,6 +64,11 @@ namespace WpfApp
 
 				EmployeesDataGrid.ItemsSource = employees;
 			}
+			*/
+
+			AddWindow addWindow = new AddWindow();
+			addWindow.ShowDialog();
+			LoadEmployees();
 		}
 	}
 }

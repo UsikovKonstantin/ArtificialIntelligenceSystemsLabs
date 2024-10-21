@@ -1,0 +1,246 @@
+﻿<Window x:Class="WpfApp.AddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp"
+        mc:Ignorable="d"
+        Title="AddWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+           Content="Фамилия:" 
+           FontSize="20" 
+           HorizontalContentAlignment="Center" 
+           VerticalContentAlignment="Center"/>
+
+            <TextBox Grid.Column="1" 
+                x:Name="textBoxLastName"
+                Text="" 
+                FontSize="20" 
+                VerticalContentAlignment="Center"
+                Height="30"
+                Padding="5,0,5,0"
+                Margin="5,5,15,5"/>
+        </Grid>
+
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+               Content="Имя:" 
+               FontSize="20" 
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center"/>
+
+            <TextBox Grid.Column="1" 
+                x:Name="textBoxFirstName"
+                Text="" 
+                FontSize="20" 
+                VerticalContentAlignment="Center"
+                Height="30"
+                Padding="5,0,5,0"
+                Margin="5,5,15,5"/>
+        </Grid>
+
+        <Grid Grid.Row="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+               Content="Отчество:" 
+               FontSize="20" 
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center"/>
+
+            <TextBox Grid.Column="1" 
+                x:Name="textBoxPatronymic"
+                Text="" 
+                FontSize="20" 
+                VerticalContentAlignment="Center"
+                Height="30"
+                Padding="5,0,5,0"
+                Margin="5,5,15,5"/>
+        </Grid>
+
+        <Grid Grid.Row="3" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+               Content="Пол:" 
+               FontSize="20" 
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center"/>
+
+            <ComboBox Grid.Column="1" 
+                x:Name="comboBoxGender"
+                Text="" 
+                FontSize="20" 
+                VerticalContentAlignment="Center"
+                Height="30"
+                Padding="5,0,5,0"
+                Margin="5,5,15,5"/>
+        </Grid>
+
+        <Grid Grid.Row="4" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+                   Content="Дата рождения:" 
+                   FontSize="20" 
+                   HorizontalContentAlignment="Center" 
+                   VerticalContentAlignment="Center"/>
+
+            <DatePicker Grid.Column="1" 
+                        x:Name="datePickerDateOfBirth"
+                        Text="" 
+                        FontSize="20" 
+                        VerticalContentAlignment="Center"
+                        Height="30"
+                        Padding="5,0,5,0"
+                        Margin="5,5,15,5" />
+        </Grid>
+
+        <Grid Grid.Row="5" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+               Content="Семейное положение:" 
+               FontSize="20" 
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center"/>
+
+            <ComboBox Grid.Column="1" 
+                x:Name="comboBoxMaritalStatus"
+                Text="" 
+                FontSize="20" 
+                VerticalContentAlignment="Center"
+                Height="30"
+                Padding="5,0,5,0"
+                Margin="5,5,15,5"/>
+        </Grid>
+
+        <Grid Grid.Row="6" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+                   Content="Наличие детей:" 
+                   FontSize="20" 
+                   HorizontalContentAlignment="Center" 
+                   VerticalContentAlignment="Center"/>
+
+            <CheckBox Grid.Column="1" 
+                x:Name="checkBoxHasChildren"
+                FontSize="20" 
+                VerticalContentAlignment="Center"
+                Height="30"
+                Padding="5,0,5,0"
+                Margin="5,5,15,5"/>
+        </Grid>
+
+        <Grid Grid.Row="7" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+               Content="Должность:" 
+               FontSize="20" 
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center"/>
+
+            <TextBox Grid.Column="1" 
+                x:Name="textBoxPosition"
+                Text="" 
+                FontSize="20" 
+                VerticalContentAlignment="Center"
+                Height="30"
+                Padding="5,0,5,0"
+                Margin="5,5,15,5"/>
+        </Grid>
+
+        <Grid Grid.Row="8" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+               Content="Ученая степень:" 
+               FontSize="20" 
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center"/>
+
+            <ComboBox Grid.Column="1" 
+            x:Name="comboBoxAcademicDegree"
+            Text="" 
+            FontSize="20" 
+            VerticalContentAlignment="Center"
+            Height="30"
+            Padding="5,0,5,0"
+            Margin="5,5,15,5"/>
+        </Grid>
+
+        <Grid Grid.Row="9" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                x:Name="buttonCancel"
+                Content="Отмена" 
+                FontSize="20" 
+                HorizontalContentAlignment="Center" 
+                VerticalContentAlignment="Center"
+                Height="30"
+                Margin="5,5,5,5" Click="buttonCancel_Click"/>
+
+            <Button Grid.Column="1"
+                x:Name="buttonAdd"
+                Content="Добавить сотрудника" 
+                FontSize="20" 
+                HorizontalContentAlignment="Center" 
+                VerticalContentAlignment="Center"
+                Height="30"
+                Margin="5,5,15,5" Click="buttonAdd_Click"/>
+        </Grid>
+        
+    </Grid>
+</Window>
